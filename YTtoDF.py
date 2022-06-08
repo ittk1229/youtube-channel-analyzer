@@ -1,28 +1,23 @@
-from apiclient.discovery import build
-import time
+import datetime
 import json
 import os
-import pandas as pd
-import matplotlib.pyplot as plt
 import re
-import datetime
-from dateutil import tz
-
-import os
-import pprint
 import time
 import urllib.error
 import urllib.request
 
-API_KEY = 'your api key'
-YOUTUBE_API_SERVICE_NAME = 'youtube'
-YOUTUBE_API_VERSION = 'v3'
+import pandas as pd
+from dateutil import tz
+from googleapiclient.discovery import build
+
+with open('API_KEY', 'r', encoding='utf8') as f:
+    API_KEY = f.read()
 
 youtube = build(
-        YOUTUBE_API_SERVICE_NAME,
-        YOUTUBE_API_VERSION,
-        developerKey=API_KEY
-    )
+    'youtube',
+    'v3',
+    developerKey=API_KEY
+)
 
 """description of function.
 Args:
@@ -44,13 +39,11 @@ def getChannelId(url):
     return url.split('/')[-1]
 
 def download_file(url, dst_path):
-        try:
-            with urllib.request.urlopen(url) as web_file:
-                data = web_file.read()
-                with open(dst_path, mode='wb') as local_file:
-                    local_file.write(data)
-        except urllib.error.URLError as e:
-            print(e)
+    try:
+        with urllib.request.urlopen(url) as web_file, open(dst_path, 'wb') as local_file:
+            local_file.write(web_file.read())
+    except urllib.error.URLError as e:
+        print(e)
 
 def writeChannelInfo(url):
     def getChannelItems(url, youtube=youtube):
@@ -65,13 +58,13 @@ def writeChannelInfo(url):
     channel = getChannelItems(url)
     name = channel['snippet']['title']
 
-    dir_c = f'res/youtuber/{name}/json/channel'
+    dir_c = f'res/YouTuber/{name}/json/channel'
     if not os.path.isdir(dir_c):
         os.makedirs(dir_c)
 
     #iconのダウンロード
     icon_url = channel["snippet"]["thumbnails"]["high"]["url"]
-    dir_i = f'res/Youtuber/{name}/icon.jpg'
+    dir_i = f'res/YouTuber/{name}/icon.jpg'
     if not os.path.isfile(dir_i): download_file(icon_url, dir_i)
 
     #jsonのダウンロード

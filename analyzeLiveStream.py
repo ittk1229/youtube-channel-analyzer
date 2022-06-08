@@ -1,11 +1,18 @@
-import YTtoDF as ytd
+import datetime
+import json
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import json
-import matplotlib.pyplot as plt
-import datetime
 from PIL import Image
-import os
+
+import YTtoDF as ytd
+
+# 日本語対応
+# 自分のOSに入っているものを指定
+#plt.rcParams['font.family'] = 'MS Gothic'
+plt.rcParams['font.family'] = 'Unifont'
+
 
 def getCol(df,col):
     """特定の列を抜き出してid付きのdataframeを作成。
@@ -72,7 +79,6 @@ def myMax(ct):
     return 0 if ct.empty else max(ct)
 
 def setFig(width=15.0, height=12.0, title='title', edgecolor='#eeeeee'):
-    plt.rcParams['font.family'] = 'MS Gothic'
     plt.rcParams['font.size'] = 16
     fig = plt.figure(figsize=(width, height), facecolor="#eeeeee", linewidth=7, edgecolor=edgecolor)
     plt.subplots_adjust(wspace=0.3, hspace=0.45)
