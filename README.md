@@ -21,4 +21,4 @@ Nijisearch では、Youtuber の中でも 「にじさんじ」メンバーの�
 
 Youtube channel anlyzer と異なり、Web 上で GUI を用いて直感的に操作することができます。
 
-[デモ動画](https://i.gyazo.com/0f4f098913be083d54348c0c7de7db90.gif)
+![9157ad363005e70feb4d1062d8b2aa40](https://user-images.githubusercontent.com/95482635/197390707-af1b7b44-40e8-440c-bf6c-74b7a0cdcd1a.gif)
